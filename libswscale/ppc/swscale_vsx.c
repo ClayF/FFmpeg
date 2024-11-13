@@ -526,7 +526,7 @@ yuv2NBPSX(16, LE, 0, 16, int32_t)
         }
 
 static av_always_inline void
-yuv2rgb_full_X_vsx_template(SwsContext *c, const int16_t *lumFilter,
+yuv2rgb_full_X_vsx_template(SwsInternal *c, const int16_t *lumFilter,
                           const int16_t **lumSrc, int lumFilterSize,
                           const int16_t *chrFilter, const int16_t **chrUSrc,
                           const int16_t **chrVSrc, int chrFilterSize,
@@ -677,7 +677,7 @@ yuv2rgb_full_X_vsx_template(SwsContext *c, const int16_t *lumFilter,
 
 
 static av_always_inline void
-yuv2rgb_full_2_vsx_template(SwsContext *c, const int16_t *buf[2],
+yuv2rgb_full_2_vsx_template(SwsInternal *c, const int16_t *buf[2],
                      const int16_t *ubuf[2], const int16_t *vbuf[2],
                      const int16_t *abuf[2], uint8_t *dest, int dstW,
                      int yalpha, int uvalpha, int y,
@@ -799,7 +799,7 @@ yuv2rgb_full_2_vsx_template(SwsContext *c, const int16_t *buf[2],
 }
 
 static av_always_inline void
-yuv2rgb_2_vsx_template(SwsContext *c, const int16_t *buf[2],
+yuv2rgb_2_vsx_template(SwsInternal *c, const int16_t *buf[2],
                      const int16_t *ubuf[2], const int16_t *vbuf[2],
                      const int16_t *abuf[2], uint8_t *dest, int dstW,
                      int yalpha, int uvalpha, int y,
@@ -975,7 +975,7 @@ yuv2rgb_2_vsx_template(SwsContext *c, const int16_t *buf[2],
 #undef SETUP
 
 static av_always_inline void
-yuv2rgb_full_1_vsx_template(SwsContext *c, const int16_t *buf0,
+yuv2rgb_full_1_vsx_template(SwsInternal *c, const int16_t *buf0,
                      const int16_t *ubuf[2], const int16_t *vbuf[2],
                      const int16_t *abuf0, uint8_t *dest, int dstW,
                      int uvalpha, int y, enum AVPixelFormat target,
@@ -1104,7 +1104,7 @@ yuv2rgb_full_1_vsx_template(SwsContext *c, const int16_t *buf0,
 }
 
 static av_always_inline void
-yuv2rgb_1_vsx_template(SwsContext *c, const int16_t *buf0,
+yuv2rgb_1_vsx_template(SwsInternal *c, const int16_t *buf0,
                      const int16_t *ubuf[2], const int16_t *vbuf[2],
                      const int16_t *abuf0, uint8_t *dest, int dstW,
                      int uvalpha, int y, enum AVPixelFormat target,
@@ -1290,7 +1290,7 @@ yuv2rgb_1_vsx_template(SwsContext *c, const int16_t *buf0,
 #undef WRITERGB
 
 #define YUV2RGBWRAPPERX(name, base, ext, fmt, hasAlpha) \
-static void name ## ext ## _X_vsx(SwsContext *c, const int16_t *lumFilter, \
+static void name ## ext ## _X_vsx(SwsInternal *c, const int16_t *lumFilter, \
                                 const int16_t **lumSrc, int lumFilterSize, \
                                 const int16_t *chrFilter, const int16_t **chrUSrc, \
                                 const int16_t **chrVSrc, int chrFilterSize, \
@@ -1303,7 +1303,7 @@ static void name ## ext ## _X_vsx(SwsContext *c, const int16_t *lumFilter, \
 }
 
 #define YUV2RGBWRAPPERX2(name, base, ext, fmt, hasAlpha) \
-static void name ## ext ## _2_vsx(SwsContext *c, const int16_t *buf[2], \
+static void name ## ext ## _2_vsx(SwsInternal *c, const int16_t *buf[2], \
                                 const int16_t *ubuf[2], const int16_t *vbuf[2], \
                                 const int16_t *abuf[2], uint8_t *dest, int dstW, \
                                 int yalpha, int uvalpha, int y) \
@@ -1313,7 +1313,7 @@ static void name ## ext ## _2_vsx(SwsContext *c, const int16_t *buf[2], \
 }
 
 #define YUV2RGBWRAPPER(name, base, ext, fmt, hasAlpha) \
-static void name ## ext ## _1_vsx(SwsContext *c, const int16_t *buf0, \
+static void name ## ext ## _1_vsx(SwsInternal *c, const int16_t *buf0, \
                                 const int16_t *ubuf[2], const int16_t *vbuf[2], \
                                 const int16_t *abuf0, uint8_t *dest, int dstW, \
                                 int uvalpha, int y) \
@@ -1425,7 +1425,7 @@ write422(const vec_s16 vy1, const vec_s16 vy2,
 }
 
 static av_always_inline void
-yuv2422_X_vsx_template(SwsContext *c, const int16_t *lumFilter,
+yuv2422_X_vsx_template(SwsInternal *c, const int16_t *lumFilter,
                      const int16_t **lumSrc, int lumFilterSize,
                      const int16_t *chrFilter, const int16_t **chrUSrc,
                      const int16_t **chrVSrc, int chrFilterSize,
@@ -1533,7 +1533,7 @@ yuv2422_X_vsx_template(SwsContext *c, const int16_t *lumFilter,
 }
 
 static av_always_inline void
-yuv2422_2_vsx_template(SwsContext *c, const int16_t *buf[2],
+yuv2422_2_vsx_template(SwsInternal *c, const int16_t *buf[2],
                      const int16_t *ubuf[2], const int16_t *vbuf[2],
                      const int16_t *abuf[2], uint8_t *dest, int dstW,
                      int yalpha, int uvalpha, int y,
@@ -1567,7 +1567,7 @@ yuv2422_2_vsx_template(SwsContext *c, const int16_t *buf[2],
 #undef SETUP
 
 static av_always_inline void
-yuv2422_1_vsx_template(SwsContext *c, const int16_t *buf0,
+yuv2422_1_vsx_template(SwsInternal *c, const int16_t *buf0,
                      const int16_t *ubuf[2], const int16_t *vbuf[2],
                      const int16_t *abuf0, uint8_t *dest, int dstW,
                      int uvalpha, int y, enum AVPixelFormat target)
@@ -1627,7 +1627,7 @@ yuv2422_1_vsx_template(SwsContext *c, const int16_t *buf0,
 }
 
 #define YUV2PACKEDWRAPPERX(name, base, ext, fmt) \
-static void name ## ext ## _X_vsx(SwsContext *c, const int16_t *lumFilter, \
+static void name ## ext ## _X_vsx(SwsInternal *c, const int16_t *lumFilter, \
                                 const int16_t **lumSrc, int lumFilterSize, \
                                 const int16_t *chrFilter, const int16_t **chrUSrc, \
                                 const int16_t **chrVSrc, int chrFilterSize, \
@@ -1641,7 +1641,7 @@ static void name ## ext ## _X_vsx(SwsContext *c, const int16_t *lumFilter, \
 
 #define YUV2PACKEDWRAPPER2(name, base, ext, fmt) \
 YUV2PACKEDWRAPPERX(name, base, ext, fmt) \
-static void name ## ext ## _2_vsx(SwsContext *c, const int16_t *buf[2], \
+static void name ## ext ## _2_vsx(SwsInternal *c, const int16_t *buf[2], \
                                 const int16_t *ubuf[2], const int16_t *vbuf[2], \
                                 const int16_t *abuf[2], uint8_t *dest, int dstW, \
                                 int yalpha, int uvalpha, int y) \
@@ -1652,7 +1652,7 @@ static void name ## ext ## _2_vsx(SwsContext *c, const int16_t *buf[2], \
 
 #define YUV2PACKEDWRAPPER(name, base, ext, fmt) \
 YUV2PACKEDWRAPPER2(name, base, ext, fmt) \
-static void name ## ext ## _1_vsx(SwsContext *c, const int16_t *buf0, \
+static void name ## ext ## _1_vsx(SwsInternal *c, const int16_t *buf0, \
                                 const int16_t *ubuf[2], const int16_t *vbuf[2], \
                                 const int16_t *abuf0, uint8_t *dest, int dstW, \
                                 int uvalpha, int y) \
@@ -1666,7 +1666,7 @@ YUV2PACKEDWRAPPER(yuv2, 422, yuyv422, AV_PIX_FMT_YUYV422)
 YUV2PACKEDWRAPPER(yuv2, 422, yvyu422, AV_PIX_FMT_YVYU422)
 YUV2PACKEDWRAPPER(yuv2, 422, uyvy422, AV_PIX_FMT_UYVY422)
 
-static void hyscale_fast_vsx(SwsContext *c, int16_t *dst, int dstWidth,
+static void hyscale_fast_vsx(SwsInternal *c, int16_t *dst, int dstWidth,
                            const uint8_t *src, int srcW, int xInc)
 {
     int i;
@@ -1781,7 +1781,7 @@ static void hyscale_fast_vsx(SwsContext *c, int16_t *dst, int dstWidth,
         vec_st((vec_s16) vd_l, 0, &out[i]); \
         vec_st((vec_s16) vd_r, 0, &out[i + 8])
 
-static void hcscale_fast_vsx(SwsContext *c, int16_t *dst1, int16_t *dst2,
+static void hcscale_fast_vsx(SwsInternal *c, int16_t *dst1, int16_t *dst2,
                            int dstWidth, const uint8_t *src1,
                            const uint8_t *src2, int srcW, int xInc)
 {
@@ -1858,65 +1858,7 @@ static void hcscale_fast_vsx(SwsContext *c, int16_t *dst1, int16_t *dst2,
 
 #undef HCSCALE
 
-static void hScale8To19_vsx(SwsContext *c, int16_t *_dst, int dstW,
-                            const uint8_t *src, const int16_t *filter,
-                            const int32_t *filterPos, int filterSize)
-{
-    int i, j;
-    int32_t *dst = (int32_t *) _dst;
-    vec_s16 vfilter, vin;
-    vec_u8 vin8;
-    vec_s32 vout;
-    const vec_u8 vzero = vec_splat_u8(0);
-    const vec_u8 vunusedtab[8] = {
-        (vec_u8) {0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7,
-                  0x8, 0x9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf},
-        (vec_u8) {0x0, 0x1, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10,
-                  0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10},
-        (vec_u8) {0x0, 0x1, 0x2, 0x3, 0x10, 0x10, 0x10, 0x10,
-                  0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10},
-        (vec_u8) {0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x10, 0x10,
-                  0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10},
-        (vec_u8) {0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7,
-                  0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10},
-        (vec_u8) {0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7,
-                  0x8, 0x9, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10},
-        (vec_u8) {0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7,
-                  0x8, 0x9, 0xa, 0xb, 0x10, 0x10, 0x10, 0x10},
-        (vec_u8) {0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7,
-                  0x8, 0x9, 0xa, 0xb, 0xc, 0xd, 0x10, 0x10},
-    };
-    const vec_u8 vunused = vunusedtab[filterSize % 8];
-
-    if (filterSize == 1) {
-        for (i = 0; i < dstW; i++) {
-            int srcPos = filterPos[i];
-            int val    = 0;
-            for (j = 0; j < filterSize; j++) {
-                val += ((int)src[srcPos + j]) * filter[filterSize * i + j];
-            }
-            dst[i] = FFMIN(val >> 3, (1 << 19) - 1); // the cubic equation does overflow ...
-        }
-    } else {
-        for (i = 0; i < dstW; i++) {
-            const int srcPos = filterPos[i];
-            vout = vec_splat_s32(0);
-            for (j = 0; j < filterSize; j += 8) {
-                vin8 = vec_vsx_ld(0, &src[srcPos + j]);
-                vin = (vec_s16) vec_mergeh(vin8, vzero);
-                if (j + 8 > filterSize) // Remove the unused elements on the last round
-                    vin = vec_perm(vin, (vec_s16) vzero, vunused);
-
-                vfilter = vec_vsx_ld(0, &filter[filterSize * i + j]);
-                vout = vec_msums(vin, vfilter, vout);
-            }
-            vout = vec_sums(vout, (vec_s32) vzero);
-            dst[i] = FFMIN(vout[3] >> 3, (1 << 19) - 1);
-        }
-    }
-}
-
-static void hScale16To19_vsx(SwsContext *c, int16_t *_dst, int dstW,
+static void hScale16To19_vsx(SwsInternal *c, int16_t *_dst, int dstW,
                              const uint8_t *_src, const int16_t *filter,
                              const int32_t *filterPos, int filterSize)
 {
@@ -1994,7 +1936,7 @@ static void hScale16To19_vsx(SwsContext *c, int16_t *_dst, int dstW,
     }
 }
 
-static void hScale16To15_vsx(SwsContext *c, int16_t *dst, int dstW,
+static void hScale16To15_vsx(SwsInternal *c, int16_t *dst, int dstW,
                              const uint8_t *_src, const int16_t *filter,
                              const int32_t *filterPos, int filterSize)
 {
@@ -2074,7 +2016,7 @@ static void hScale16To15_vsx(SwsContext *c, int16_t *dst, int dstW,
 
 #endif /* HAVE_VSX */
 
-av_cold void ff_sws_init_swscale_vsx(SwsContext *c)
+av_cold void ff_sws_init_swscale_vsx(SwsInternal *c)
 {
 #if HAVE_VSX
     enum AVPixelFormat dstFormat = c->dstFormat;
@@ -2092,8 +2034,6 @@ av_cold void ff_sws_init_swscale_vsx(SwsContext *c)
                 c->hyscale_fast = hyscale_fast_vsx;
                 c->hcscale_fast = hcscale_fast_vsx;
             }
-        } else {
-            c->hyScale = c->hcScale = hScale8To19_vsx;
         }
     } else {
         if (power8) {
